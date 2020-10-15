@@ -49,8 +49,10 @@ public class UserController {
 	}
 
 	@PostMapping("")
-	public ResponseEntity<UserDto> addUser(@Valid @RequestBody User user, BindingResult results) {
+	public ResponseEntity<UserDto> addUser(@Valid @RequestBody UserDto userDto, BindingResult results) {
 		ValidateFields.validateUserFields(results);
+		
+		User user = this.userService.convertUserDtoToUser(userDto);
 
 		ResponseEntity<UserDto> response = new ResponseEntity<UserDto>(this.userService.addUser(user), HttpStatus.OK);
 
@@ -58,9 +60,11 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<UserDto> editUser(@Valid @RequestBody User user, BindingResult results,
+	public ResponseEntity<UserDto> editUser(@Valid @RequestBody UserDto userDto, BindingResult results,
 			@PathVariable("id") Integer userId) {
 		ValidateFields.validateUserFields(results);
+		
+		User user = this.userService.convertUserDtoToUser(userDto);
 		
 		if(this.userService.getUserById(userId) == null)
 			throw new UserNotFoundException("User not found with ID: " + userId);

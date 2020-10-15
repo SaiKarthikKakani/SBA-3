@@ -29,6 +29,18 @@ public class UserServiceImpl implements UserService {
 
 		return userDto;
 	}
+	
+	public User convertUserDtoToUser(UserDto userdto) {
+		User user = new User();
+
+		user.setUserId(userdto.getUserId());
+		user.setEmail(userdto.getEmail());
+		user.setFirstName(userdto.getFirstName());
+		user.setLastName(userdto.getLastName());
+		user.setMobile(userdto.getMobile());
+
+		return user;
+	}
 
 	@Override
 	public List<UserDto> getAllUsers() {

@@ -60,28 +60,32 @@ public class InterviewController {
 	}
 
 	@PostMapping("")
-	public ResponseEntity<InterviewDto> addInterview(@Valid @RequestBody Interview interview, BindingResult results) {
+	public ResponseEntity<InterviewDto> addInterview(@Valid @RequestBody InterviewDto interviewDto, BindingResult results) {
 		ValidateFields.validateInterviewFields(results);
+		
+		Interview interview = this.interviewService.convertInterviewDtoToInterview(interviewDto);
 
-		InterviewDto interviewDto = this.interviewService.addInterview(interview);
+		InterviewDto updatedInterviewDto = this.interviewService.addInterview(interview);
 
-		ResponseEntity<InterviewDto> response = new ResponseEntity<InterviewDto>(interviewDto, HttpStatus.OK);
+		ResponseEntity<InterviewDto> response = new ResponseEntity<InterviewDto>(updatedInterviewDto, HttpStatus.OK);
 
 		return response;
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<InterviewDto> editInterview(@Valid @RequestBody Interview interview, BindingResult results,
+	public ResponseEntity<InterviewDto> editInterview(@Valid @RequestBody InterviewDto interviewDto, BindingResult results,
 			@PathVariable("id") Integer interviewId) {
 		ValidateFields.validateInterviewFields(results);
+		
+		Interview interview = this.interviewService.convertInterviewDtoToInterview(interviewDto);
 
 		if (this.interviewService.getInterviewById(interviewId) == null)
 			throw new InterviewNotFoundException("Interview not found with ID: " + interviewId);
 
 		interview.setInterviewId(interviewId);
-		InterviewDto interviewDto = this.interviewService.editInterview(interview);
+		InterviewDto updatedInterviewDto = this.interviewService.editInterview(interview);
 
-		ResponseEntity<InterviewDto> response = new ResponseEntity<InterviewDto>(interviewDto, HttpStatus.OK);
+		ResponseEntity<InterviewDto> response = new ResponseEntity<InterviewDto>(updatedInterviewDto, HttpStatus.OK);
 
 		return response;
 	}

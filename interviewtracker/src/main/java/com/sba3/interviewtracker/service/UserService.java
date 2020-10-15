@@ -11,4 +11,5 @@ public interface UserService {
 	public UserDto addUser(User user);
 	public UserDto editUser(User user);
 	public UserDto deleteUser(Integer userId);
+	public User convertUserDtoToUser(UserDto userDto);
 }

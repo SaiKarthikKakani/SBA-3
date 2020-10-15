@@ -18,4 +18,5 @@ public interface InterviewService {
 	public List<UserDto> getAttendeesForInterview(Integer interviewId);
 	public InterviewDto searchInterviewByInterviewName(String interviewName);
 	public List<InterviewDto> searchInterviewByInterviewerName(String interviewerName);
+	public Interview convertInterviewDtoToInterview(InterviewDto interviewDto);
 }

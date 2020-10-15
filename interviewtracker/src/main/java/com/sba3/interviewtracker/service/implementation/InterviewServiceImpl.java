@@ -161,9 +161,23 @@ public class InterviewServiceImpl implements InterviewService {
 		interviewDto.setInterviewStatus(interview.getInterviewStatus());
 		interviewDto.setRemarks(interview.getRemarks());
 		interviewDto.setUserSkills(interview.getUserSkills());
-//		interviewDto.setUsersInfo(interview.getUsersInfo());
 
 		return interviewDto;
+	}
+	
+	public Interview convertInterviewDtoToInterview(InterviewDto interviewdto) {
+		Interview interview = new Interview();
+
+		interview.setInterviewId(interviewdto.getInterviewId());
+		interview.setInterviewName(interviewdto.getInterviewName());
+		interview.setInterviewerName(interviewdto.getInterviewerName());
+		interview.setDate(interviewdto.getDate());
+		interview.setTime(interviewdto.getTime());
+		interview.setInterviewStatus(interviewdto.getInterviewStatus());
+		interview.setRemarks(interviewdto.getRemarks());
+		interview.setUserSkills(interviewdto.getUserSkills());
+
+		return interview;
 	}
 
 }
